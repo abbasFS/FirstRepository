@@ -1,0 +1,42 @@
+digraph G {
+node [fontname = "helvetica"];
+  edge [fontname = "helvetica"];
+
+  fontsize="50"
+
+
+start [ 
+    label = "start"; 
+    shape = oval;
+];
+input [
+    label = "Open Web browser\n Enter URL"; 
+    shape = rectangle;
+];
+AfterBrowser [
+    label = "Request goes to DNS resolve to get the IP address of the host";
+    shape = rectangle;
+];
+DNSRequest [
+    label = "If IP found, request goes to host";
+    shape = diamond;
+];
+HostServer[
+    label = "Host Server";
+    shape = square;
+];
+
+DNSserver[
+    label = "DNS SERVER";
+    shape = square;
+];
+
+start -> input;
+input ->  AfterBrowser;
+AfterBrowser -> DNSserver[ label = "Domain name Server"];
+DNSserver -> AfterBrowser;
+AfterBrowser -> DNSRequest[ label = "IP"];
+ DNSRequest ->HostServer[ label = "Yes\n Sends request to host server"];
+HostServer -> input[ label = "Host sent response to clint"];
+DNSRequest -> input[ label ="No,Page doesnt exist"];
+}
